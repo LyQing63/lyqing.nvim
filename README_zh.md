@@ -20,8 +20,8 @@
 ### 快速安装
 
 ```bash
-git clone https://github.com/MarsWang42/my-dev-config.git ~/Code/my-dev-config
-cd ~/Code/my-dev-config
+git clone https://github.com/MarsWang42/mars.nvim.git ~/.config/mars.nvim
+cd ~/.config/mars.nvim
 ./install.sh
 ```
 
