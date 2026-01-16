@@ -126,3 +126,14 @@
 | 键位 | 模式 | 功能 | 中文解释 |
 | :--- | :--- | :--- | :--- |
 | `<leader>gs` | Normal | Grug Far | 打开全局查找替换窗口 |
+
+## 8. 代码折叠 (Folding)
+*文件来源: `lua/mars/options.lua` (启用 Treesitter 折叠)*
+
+| 键位 | 模式 | 功能 | 中文解释 |
+| :--- | :--- | :--- | :--- |
+| `za` | Normal | Toggle Fold | 切换折叠/展开 (当前代码块) |
+| `zM` | Normal | Close All | 折叠所有代码 (概览模式) |
+| `zR` | Normal | Open All | 展开所有代码 |
+| `zo` | Normal | Open Fold | 展开当前折叠 |
+| `zc` | Normal | Close Fold | 折叠当前代码块 |
