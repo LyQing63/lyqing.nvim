@@ -49,6 +49,9 @@
 | `<C-j>` | Normal | Navigate Down | 切换到下方窗口 (支持 Vim/Tmux) |
 | `<C-k>` | Normal | Navigate Up | 切换到上方窗口 (支持 Vim/Tmux) |
 | `<C-l>` | Normal | Navigate Right | 切换到右侧窗口 (支持 Vim/Tmux) |
+| **Jump List (跳转列表)** | | | |
+| `<C-o>` | Normal | Jump Back | 返回上一个跳转位置 (如 grd 后返回) |
+| `<C-i>` | Normal | Jump Forward | 前进到下一个跳转位置 |
 
 ## 3. 代码智能与 LSP (Code Intelligence)
 *文件来源: `plugins/lsp.lua`, `init.lua`*
