@@ -1,57 +1,49 @@
 return {
   {
-    'coder/claudecode.nvim',
+    'NickvanDyke/opencode.nvim',
     dependencies = {
-      'folke/snacks.nvim',
+      -- Recommended for `ask()` and `select()`.
+      -- Required for `snacks` provider.
+      ---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
+      { 'folke/snacks.nvim', opts = { input = {}, picker = {}, terminal = {} } },
     },
-    config = true,
-    opts = {
-      terminal = {
-        snacks_win_opts = {
-          wo = {
-            winblend = 100,
-            winhighlight = 'NormalFloat:MyTransparentGroup',
-          },
-        },
-      },
-    },
-    terminal = { enabled = true },
-    keys = {
-      { '<leader>c', nil, desc = 'Claude Code' },
-      { '<leader>cc', '<cmd>ClaudeCode<cr>', desc = 'Toggle Claude' },
-      { '<leader>cf', '<cmd>ClaudeCodeFocus<cr>', desc = 'Focus Claude' },
-      { '<leader>cr', '<cmd>ClaudeCode --resume<cr>', desc = 'Resume Claude' },
-      { '<leader>cC', '<cmd>ClaudeCode --continue<cr>', desc = 'Continue Claude' },
-      { '<leader>cm', '<cmd>ClaudeCodeSelectModel<cr>', desc = 'Select Claude model' },
-      { '<leader>cb', '<cmd>ClaudeCodeAdd %<cr>', desc = 'Add current buffer' },
-      { '<leader>cs', '<cmd>ClaudeCodeSend<cr>', mode = 'v', desc = 'Send to Claude' },
-      {
-        '<leader>cs',
-        '<cmd>ClaudeCodeTreeAdd<cr>',
-        desc = 'Add file',
-        ft = { 'NvimTree', 'neo-tree', 'oil', 'minifiles', 'netrw' },
-      },
-      { '<leader>ca', '<cmd>ClaudeCodeDiffAccept<cr>', desc = 'Accept diff' },
-      { '<leader>cd', '<cmd>ClaudeCodeDiffDeny<cr>', desc = 'Deny diff' },
-    },
-  },
-
-  {
-    'gutsavgupta/nvim-gemini-companion',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    event = 'VeryLazy',
     config = function()
-      require('gemini').setup()
+      ---@type opencode.Opts
+      vim.g.opencode_opts = {
+        -- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition".
+      }
+
+      -- Required for `opts.events.reload`.
+      vim.o.autoread = true
+
+      -- Recommended/example keymaps.
+      vim.keymap.set({ 'n', 'x' }, '<C-a>', function()
+        require('opencode').ask('@this: ', { submit = true })
+      end, { desc = 'Ask opencode' })
+      vim.keymap.set({ 'n', 'x' }, '<C-x>', function()
+        require('opencode').select()
+      end, { desc = 'Execute opencode action…' })
+      vim.keymap.set({ 'n', 't' }, '<C-.>', function()
+        require('opencode').toggle()
+      end, { desc = 'Toggle opencode' })
+
+      vim.keymap.set({ 'n', 'x' }, 'go', function()
+        return require('opencode').operator '@this '
+      end, { expr = true, desc = 'Add range to opencode' })
+      vim.keymap.set('n', 'goo', function()
+        return require('opencode').operator '@this ' .. '_'
+      end, { expr = true, desc = 'Add line to opencode' })
+
+      vim.keymap.set('n', '<S-C-u>', function()
+        require('opencode').command 'session.half.page.up'
+      end, { desc = 'opencode half page up' })
+      vim.keymap.set('n', '<S-C-d>', function()
+        require('opencode').command 'session.half.page.down'
+      end, { desc = 'opencode half page down' })
+
+      -- You may want these if you stick with the opinionated "<C-a>" and "<C-x>" above — otherwise consider "<leader>o".
+      vim.keymap.set('n', '+', '<C-a>', { desc = 'Increment', noremap = true })
+      vim.keymap.set('n', '-', '<C-x>', { desc = 'Decrement', noremap = true })
     end,
-    keys = {
-      { '<leader>g', nil, desc = 'Gemini Code' },
-      { '<leader>gg', '<cmd>GeminiToggle<cr>', desc = 'Toggle Gemini sidebar' },
-      { '<leader>gc', '<cmd>GeminiSwitchToCli<cr>', desc = 'Spawn or switch to AI session' },
-      { '<leader>gd', '<cmd>GeminiSendLineDiagnostic<cr>', mode = 'n', desc = 'Send to Gemini' },
-      { '<leader>gD', '<cmd>GeminiSendFileDiagnostic<cr>', mode = 'n', desc = 'Send to Gemini' },
-      { '<leader>ga', '<cmd>GeminiAccept<cr>', mode = 'n', desc = 'Accept Gemini Diff' },
-      { '<leader>gd', '<cmd>GeminiDeny<cr>', mode = 'n', desc = 'Deny Gemini Diff' },
-      { '<leader>gs', '<cmd>GeminiSend<cr>', mode = { 'v' }, desc = 'Send selection to Gemini' },
-    },
   },
 }

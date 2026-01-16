@@ -1,159 +1,62 @@
-# ☄️ Mars.nvim
+# ☄️ LyQing.nvim 参考 [Mars.nvim](https://github.com/MarsWang42/mars.nvim)
 
 [English](README.md) | [中文](README_zh.md)
 
-Personal Neovim and tmux configuration with a focus on modern development experience, AI-assisted coding, and productivity.
-Based on [Kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim).
+个人 Neovim 和 tmux 配置，专注于现代开发体验、AI 辅助编程和生产力。
+基于 [Kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim)。
 
 ![Screenshot](Screenshot.png)
 
-## 📦 Installation
+## 📦 安装
 
-### Prerequisites
+### 前置要求
 
-- **Neovim** ≥ 0.10 (recommended: 0.11+)
+- **Neovim** ≥ 0.10（推荐 0.11+）
 - **Git**
-- **A Nerd Font** (for icons)
-- **Node.js** (for LSP servers)
-- **ripgrep** (for telescope grep)
+- **Nerd Font**（用于图标显示）
+- **Node.js**（用于 LSP 服务器）
+- **ripgrep**（用于 telescope 搜索）
 
-### Quick Install
+### 快速安装
 
 ```bash
-git clone https://github.com/MarsWang42/mars.nvim.git ~/.config/mars.nvim
+git clone https://github.com/LyQing63/lyqing.nvim.git ~/.config/mars.nvim
 cd ~/.config/mars.nvim
 chmod +x install.sh
 ./install.sh
 ```
 
-The install script will:
-- Create symlinks in `~/.config/nvim` and `~/.config/tmux`
-- Backup any existing configs (with timestamps)
+安装脚本会：
+- 在 `~/.config/nvim` 和 `~/.config/tmux` 创建符号链接
+- 自动备份现有配置（带时间戳）
 
 ---
 
-## ✨ Features
+## ✨ 功能键位
 
-### 🤖 AI-Powered Development
+请参考文档[Keymaps](./keymaps.md)。
 
-| Plugin | Description | Key Bindings |
-|--------|-------------|--------------|
-| **[claudecode.nvim](https://github.com/coder/claudecode.nvim)** | Claude Code integration for AI pair programming | `<leader>cc` toggle, `<leader>cs` send selection |
-| **[nvim-gemini-companion](https://github.com/gutsavgupta/nvim-gemini-companion)** | Gemini AI integration | `<leader>gg` toggle |
-| **[supermaven-nvim](https://github.com/supermaven-inc/supermaven-nvim)** | Fast AI code completion | Auto-suggests as you type |
-
-**Claude Code keybindings:**
-- `<leader>cc` - Toggle Claude Code terminal
-- `<leader>cf` - Focus Claude terminal
-- `<leader>cr` - Resume previous conversation
-- `<leader>cs` - Send visual selection to Claude
-- `<leader>cb` - Add current buffer to context
-- `<leader>ca` / `<leader>cd` - Accept/Deny diff suggestions
-
-**Gemini keybindings:**
-- `<leader>gg` - Toggle Gemini sidebar
-- `<leader>gc` - Switch to AI session
-- `<leader>ga` / `<leader>gd` - Accept/Deny diff
-
----
-
-### 🔍 Navigation & Search
-
-| Plugin | Description | Key Bindings |
-|--------|-------------|--------------|
-| **[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)** | Fuzzy finder for files, grep, and more | `<C-p>` files, `<leader>sg` grep |
-| **[leap.nvim](https://github.com/ggandor/leap.nvim)** | Lightning-fast motion anywhere on screen | `e` to leap, `E` cross-window |
-| **[grug-far.nvim](https://github.com/MagicDuck/grug-far.nvim)** | Find and replace across files | `<leader>gs` |
-
-**Telescope shortcuts:**
-- `<C-p>` / `<leader>sf` - Find files
-- `<leader>sg` - Live grep
-- `<leader>sw` - Grep current word
-- `<leader><leader>` - Find buffers
-- `<leader>/` - Fuzzy search in current buffer
-
----
-
-### 📂 Git Integration
-
-| Plugin | Description | Key Bindings |
-|--------|-------------|--------------|
-| **[neogit](https://github.com/NeogitOrg/neogit)** | Magit-like Git UI | `<leader>ng` |
-| **[gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)** | Git decorations and hunk actions | `]c` / `[c` navigate hunks |
-| **[diffview.nvim](https://github.com/sindrets/diffview.nvim)** | Enhanced diff viewer | Via Neogit |
-
-**Gitsigns shortcuts:**
-- `<leader>hs` - Stage hunk
-- `<leader>hr` - Reset hunk
-- `<leader>hp` - Preview hunk
-- `<leader>hb` - Blame line
-- `<leader>hd` - Diff against index
-
----
-
-### 🛠️ LSP & Code Intelligence
-
-- **Auto-configured LSPs** via Mason: Go, TypeScript, Python, Lua, and more
-- **Format on save** with conform.nvim (stylua, prettier, gofumpt, etc.)
-- **Diagnostics** with inline virtual text and floating windows
-
-**LSP keybindings:**
-- `grn` - Rename symbol
-- `gra` - Code actions
-- `grd` - Go to definition
-- `grr` - Find references
-- `gO` - Document symbols
-- `L` - Show line diagnostics
-
----
-
-### 🎨 UI & Quality of Life
-
-| Plugin | Purpose |
-|--------|---------|
-| **[tokyonight.nvim](https://github.com/folke/tokyonight.nvim)** | Colorscheme with transparent background |
-| **[mini.nvim](https://github.com/echasnovski/mini.nvim)** | Statusline, surround, and text objects |
-| **[which-key.nvim](https://github.com/folke/which-key.nvim)** | Keybinding hints popup |
-| **[neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)** | File explorer (`<C-e>`) |
-| **[todo-comments.nvim](https://github.com/folke/todo-comments.nvim)** | Highlight TODO/FIXME/etc |
-| **[vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)** | Seamless navigation between vim and tmux |
-
----
-
-## ⌨️ Key Bindings Summary
-
-| Key | Action |
-|-----|--------|
-| `<Space>` | Leader key |
-| `jk` | Escape (insert/terminal mode) |
-| `;` | Command mode (`:`) |
-| `tn` / `tj` / `tk` | New tab / Next / Previous |
-| `<C-h/j/k/l>` | Navigate splits (tmux-aware) |
-| `e` / `E` | Leap motion |
-
----
-
-## 📁 Structure
+## 📁 目录结构
 
 ```
 .
-├── install.sh          # Installation script
+├── install.sh          # 安装脚本
 ├── nvim/
-│   ├── init.lua        # Entry point
+│   ├── init.lua        # 入口文件
 │   └── lua/mars/
-│       ├── options.lua     # Vim options
-│       ├── keymaps.lua     # Global keybindings
-│       └── plugins/        # Plugin configurations
+│       ├── options.lua     # Vim 选项
+│       ├── keymaps.lua     # 全局快捷键
+│       └── plugins/        # 插件配置
 │           ├── lsp.lua
 │           ├── telescope.lua
 │           ├── gitsigns.lua
 │           └── ...
 └── tmux/
-    └── tmux.conf       # Tmux configuration
+    └── tmux.conf       # Tmux 配置
 ```
 
 ---
 
-## 📝 License
+## 📝 许可证
 
 MIT

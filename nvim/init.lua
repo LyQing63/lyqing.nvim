@@ -165,6 +165,7 @@ require('lazy').setup({
         ['<C-e>'] = { 'hide', 'show' },
         ['<C-j>'] = { 'select_next', 'fallback' },
         ['<C-k>'] = { 'select_prev', 'fallback' },
+        ['<CR>'] = { 'accept', 'fallback' },
       },
       appearance = {
         nerd_font_variant = 'mono',
