@@ -154,6 +154,7 @@ require('lazy').setup({
           }
         end,
       },
+      'Yu-Leo/cmp-go-pkgs',
     },
     --- @module 'blink.cmp'
     --- @type blink.cmp.Config
@@ -174,9 +175,10 @@ require('lazy').setup({
         documentation = { auto_show = false, auto_show_delay_ms = 500 },
       },
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'lazydev' },
+        default = { 'lsp', 'path', 'snippets', 'lazydev', 'go_pkgs' },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+          go_pkgs = { name = 'go_pkgs', module = 'blink.compat.source' },
         },
       },
       snippets = { preset = 'luasnip' },
@@ -205,6 +207,12 @@ require('lazy').setup({
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
   {
+    'numToStr/Comment.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
+
+  {
     'echasnovski/mini.nvim',
     config = function()
       require('mini.ai').setup { n_lines = 500 }
@@ -225,7 +233,7 @@ require('lazy').setup({
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs',
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'python' },
       auto_install = true,
       highlight = {
         enable = true,
@@ -311,6 +319,8 @@ require('lazy').setup({
   require 'mars.plugins.neo-tree',
   require 'mars.plugins.gitsigns',
   require 'mars.plugins.greeter',
+  require 'mars.plugins.go',
+  require 'mars.plugins.markdown',
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {

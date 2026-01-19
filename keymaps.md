@@ -29,7 +29,8 @@
 | `<leader>sf` | Normal | Find files | 查找文件 |
 | `<leader>sg` | Normal | Live grep | 全局搜索关键字 (grep) |
 | `<leader>sw` | Normal | Grep string | 搜索当前光标下的单词 |
-| `<leader>sb` | Normal | Buffers | 查找已打开的缓冲区 |
+| `<leader>ss` | Normal | Select Telescope | 选择 Telescope 功能菜单 |
+| `<leader><leader>` | Normal | Buffers | 查找已打开的缓冲区 |
 | `<leader>sh` | Normal | Help tags | 查找帮助文档 |
 | `<leader>sk` | Normal | Keymaps | 查找快捷键 |
 | `<leader>sd` | Normal | Diagnostics | 查找项目诊断信息 |
@@ -40,6 +41,7 @@
 | `<leader>sn` | Normal | Neovim files | 查找 Neovim 配置文件 |
 | **Neo-tree (文件浏览器)** | | | |
 | `<C-e>` | Normal | Toggle Neo-tree | 打开/关闭文件浏览器 |
+| `.` | Neo-tree | Toggle hidden files | 切换显示/隐藏隐藏文件 |
 | `z` | Neo-tree | Grug-far replace | 在当前目录进行全局替换 |
 | **Leap (快速跳转)** | | | |
 | `e` | N/V/O | Leap forward/backward | 屏幕内快速双向跳转 |
@@ -58,6 +60,7 @@
 
 | 键位 | 模式 | 功能 | 中文解释 |
 | :--- | :--- | :--- | :--- |
+| `K` | Normal | Hover Documentation | 显示光标下符号的文档/定义 (Shift+K) |
 | `grn` | Normal | Rename | 重命名变量/函数 |
 | `gra` | N/X | Code Action | 代码操作 (快速修复) |
 | `grr` | Normal | References | 查找引用 |
@@ -123,14 +126,58 @@
 | `go` | N/X | Add to Context | 将选中范围添加到 AI 上下文 |
 | `goo` | Normal | Add Line | 将当前行添加到 AI 上下文 |
 
-## 7. 其他工具 (Others)
-*文件来源: `init.lua`*
+## 7. 代码注释 (Comment)
+*文件来源: `init.lua` (Comment.nvim)*
+
+| 键位 | 模式 | 功能 | 中文解释 |
+| :--- | :--- | :--- | :--- |
+| `gcc` | Normal | Toggle line comment | 注释/取消注释当前行 |
+| `gbc` | Normal | Toggle block comment | 块注释/取消块注释当前行 |
+| `gc` + 动作 | Normal | Line comment | 注释指定范围 (如 `gc2j` 注释下2行) |
+| `gb` + 动作 | Normal | Block comment | 块注释指定范围 |
+| `gc` | Visual | Toggle line comment | 注释/取消注释选中行 |
+| `gb` | Visual | Toggle block comment | 块注释/取消块注释选中内容 |
+
+**常用示例**：
+- `gcc` - 注释/取消注释当前行
+- `gc2j` - 注释当前行及下面2行
+- `gcip` - 注释整个段落
+- `gcG` - 注释到文件末尾
+- Visual 模式选中多行后按 `gc` - 注释所有选中行
+
+## 8. 文本包裹 (Surround)
+*文件来源: `init.lua` (mini.surround)*
+
+| 键位 | 模式 | 功能 | 中文解释 |
+| :--- | :--- | :--- | :--- |
+| `sa` + 对象 + 符号 | N/V | Add surround | 添加包裹符号 (如 `saiw"` 用引号包裹单词) |
+| `sd` + 符号 | Normal | Delete surround | 删除周围的符号 (如 `sd"` 删除引号) |
+| `sr` + 旧符号 + 新符号 | Normal | Replace surround | 替换符号 (如 `sr"'` 将引号替换为单引号) |
+| `sh` | Normal | Highlight surround | 高亮显示周围的符号 |
+| `sn` | Normal | Update n-lines | 更新搜索行数 |
+
+**常用示例**：
+- `saiw"` - 给当前单词添加双引号
+- `saiw(` - 给当前单词添加括号（带空格）
+- `saiw)` - 给当前单词添加括号（无空格）
+- `sa2w[` - 给接下来两个单词添加方括号
+- `sd"` - 删除周围的双引号
+- `sr"'` - 将双引号替换为单引号
+- `sr)]` - 将 `()` 替换为 `[]`
+
+**Visual 模式**：
+- 选中文本后按 `sa` + 符号，如选中后 `sa"` 用引号包裹
+
+## 9. 其他工具 (Others)
+*文件来源: `init.lua`, `plugins/ai.lua`*
 
 | 键位 | 模式 | 功能 | 中文解释 |
 | :--- | :--- | :--- | :--- |
 | `<leader>gs` | Normal | Grug Far | 打开全局查找替换窗口 |
+| `+` | Normal | Increment | 数字递增 (原生 `<C-a>`) |
+| `-` | Normal | Decrement | 数字递减 (原生 `<C-x>`) |
 
-## 8. 代码折叠 (Folding)
+## 10. 代码折叠 (Folding)
 *文件来源: `lua/mars/options.lua` (启用 Treesitter 折叠)*
 
 | 键位 | 模式 | 功能 | 中文解释 |

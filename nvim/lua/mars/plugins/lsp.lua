@@ -30,6 +30,7 @@ return {
           vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
+        map('K', vim.lsp.buf.hover, 'Hover Documentation')
         map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
         map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
         map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -141,7 +142,32 @@ return {
       ts_ls = {},
       eslint = {},
       ruff = {},
-      pyright = {},
+      pyright = {
+        before_init = function(_, config)
+          -- Try to find uv virtual environment
+          local venv_paths = {
+            vim.fn.getcwd() .. '/.venv',  -- uv default location
+            vim.env.VIRTUAL_ENV,           -- activated venv
+          }
+          
+          for _, path in ipairs(venv_paths) do
+            if path and vim.fn.isdirectory(path) == 1 then
+              config.settings.python = config.settings.python or {}
+              config.settings.python.pythonPath = path .. '/bin/python'
+              break
+            end
+          end
+        end,
+        settings = {
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+              diagnosticMode = 'workspace',
+            },
+          },
+        },
+      },
       lua_ls = {
         settings = {
           Lua = {

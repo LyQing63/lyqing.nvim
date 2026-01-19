@@ -47,6 +47,7 @@ return {
         mappings = {
           ['<C-e>'] = 'close_window',
           ['o'] = 'open',
+          ['.'] = 'toggle_hidden',
           ['O'] = {
             'show_help',
             nowait = false,
